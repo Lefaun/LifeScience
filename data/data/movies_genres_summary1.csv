@@ -1,4 +1,4 @@
-year,Name,Title,ActorId,ActorId,MovieId,Country,Genre
+year,Name,Title,ActorId,ActorId,MovieId,Country,genre
 2013,50 Cent,Escape Plan,629,629,698,America,#N/A
 2009,Aamir Khan,3 Idiots,646,646,183,America,Comedy
 2011,Aaron Eckhart,Battle Los Angeles,847,847,294,America,Sci-Fi
