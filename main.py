@@ -9,7 +9,7 @@ st.set_page_config(page_title="Movies and Animal Data Visualization", page_icon=
 st.title("🎬 Movies and Animal Data Visualization")
 st.write(
     """
-    This app visualizes data from The Movie Databases  Just click on the widgets below to explore!
+    This app visualizes data from The Movie Databases Just click on the widgets below to explore!
     """
 )
 
@@ -61,7 +61,7 @@ if validate_columns(movie_df, movie_required_columns):
     )
 
     # Show a slider widget with the years using `st.slider`.
-    years = st.slider("Years", 1986, 2016, (2000, 2024))
+    years = st.slider("Years", 1986, 2016, (2000, 2016))
 
     # Filter the movie DataFrame based on the widget input and reshape it.
     df_filtered = movie_df[(movie_df["genre"].isin(genres)) & (movie_df["year"].between(years[0], years[1]))]
@@ -99,6 +99,22 @@ else:
 # Ensure the species DataFrame has the necessary columns
 species_required_columns = ["species", "protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"]
 if validate_columns(species_df, species_required_columns):
+    # Show a multiselect widget with the species using `st.multiselect`.
+    species = st.multiselect(
+        "Species",
+        species_df['species'].unique(),
+        species_df['species'].unique()[:5]  # Selecting the first 5 species by default
+    )
+
+    # Filter the species DataFrame based on the widget input.
+    species_filtered = species_df[species_df["species"].isin(species)]
+    
+    # Display the data as a table using `st.dataframe`.
+    st.dataframe(
+        species_filtered,
+        use_container_width=True,
+    )
+
     # Show a multiselect widget with the animal variables using `st.multiselect`.
     variables = st.multiselect(
         "Variables",
@@ -108,7 +124,7 @@ if validate_columns(species_df, species_required_columns):
 
     # Show a bar chart for the selected variables of species.
     if variables:
-        species_chart = alt.Chart(species_df).transform_fold(
+        species_chart = alt.Chart(species_filtered).transform_fold(
             variables,
             as_=['Variable', 'Value']
         ).mark_bar().encode(
@@ -124,9 +140,9 @@ if validate_columns(species_df, species_required_columns):
     y_var = st.selectbox("Choose Y variable for regression", ["satisfaction", "feeding", "protection", "defense", "attack"])
 
     # Ensure the selected variables are numeric
-    if species_df[x_var].dtype in [np.float64, np.int64] and species_df[y_var].dtype in [np.float64, np.int64]:
-        x = np.array(species_df[x_var]).reshape(-1, 1)
-        y = np.array(species_df[y_var]).reshape(-1, 1)
+    if species_filtered[x_var].dtype in [np.float64, np.int64] and species_filtered[y_var].dtype in [np.float64, np.int64]:
+        x = np.array(species_filtered[x_var]).reshape(-1, 1)
+        y = np.array(species_filtered[y_var]).reshape(-1, 1)
 
         # Fit the regression model.
         model = LinearRegression()
@@ -135,8 +151,8 @@ if validate_columns(species_df, species_required_columns):
 
         # Create a DataFrame with the regression results.
         regression_df = pd.DataFrame({
-            x_var: species_df[x_var],
-            y_var: species_df[y_var],
+            x_var: species_filtered[x_var],
+            y_var: species_filtered[y_var],
             'predicted_' + y_var: y_pred.flatten()
         })
 
