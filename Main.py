@@ -20,7 +20,7 @@ st.write(
 @st.cache
 def load_movie_data():
     try:
-        df = pd.read_csv("data/data/movies_genres_summary3.csv")
+        df = pd.read_csv("data/movies_genres_summary.csv")
         return df
     except Exception as e:
         st.error(f"Error loading movie data: {e}")
@@ -48,7 +48,7 @@ def validate_columns(df, required_columns):
     return True
 
 # Ensure the movie DataFrame has the necessary columns
-movie_required_columns = ["genre", "year", "Title"]
+movie_required_columns = ["genre", "year", "gross"]
 if validate_columns(movie_df, movie_required_columns):
     # Show a multiselect widget with the genres using `st.multiselect`.
     genres = st.multiselect(
@@ -65,7 +65,7 @@ if validate_columns(movie_df, movie_required_columns):
     
     # Ensure that we are using numeric aggregation functions on the 'gross' column
     df_reshaped = df_filtered.pivot_table(
-        index="year", columns="genre", values="Title", aggfunc="mean", fill_value=0
+        index="year", columns="genre", values="gross", aggfunc="mean", fill_value=0
     )
     df_reshaped = df_reshaped.sort_values(by="year", ascending=False)
 
@@ -78,7 +78,7 @@ if validate_columns(movie_df, movie_required_columns):
 
     # Display the data as an Altair chart using `st.altair_chart`.
     df_chart = pd.melt(
-        df_reshaped.reset_index(), id_vars="year", var_name="genre", value_name="Title"
+        df_reshaped.reset_index(), id_vars="year", var_name="genre", value_name="grosss"
     )
     chart = (
         alt.Chart(df_chart)
