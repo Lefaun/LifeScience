@@ -110,45 +110,4 @@ if validate_columns(species_df, species_required_columns):
 
     # Show a bar chart for the selected variables of species.
     if variables:
-        species_chart = alt.Chart(species_df).transform_fold(
-            variables,
-            as_=['Variable', 'Value']
-        ).mark_bar().encode(
-            x='species:N',
-            y='Value:Q',
-            color='Variable:N',
-            tooltip=['species', 'Variable', 'Value']
-        ).properties(height=320, width=640)
-        st.altair_chart(species_chart, use_container_width=True)
-
-    # Prepare data for linear regression plot.
-    x_var = st.selectbox("Choose X variable for regression", ["feeding", "protection", "defense", "attack", "satisfaction"])
-    y_var = st.selectbox("Choose Y variable for regression", ["satisfaction", "feeding", "protection", "defense", "attack"])
-
-    x = np.array(species_df[x_var]).reshape(-1, 1)
-    y = np.array(species_df[y_var]).reshape(-1, 1)
-
-    # Fit the regression model.
-    model = LinearRegression()
-    model.fit(x, y)
-    y_pred = model.predict(x)
-
-    # Create a DataFrame with the regression results.
-    regression_df = pd.DataFrame({
-        x_var: species_df[x_var],
-        y_var: species_df[y_var],
-        'predicted_' + y_var: y_pred.flatten()
-    })
-
-    # Display the linear regression chart.
-    regression_chart = alt.Chart(regression_df).mark_point().encode(
-        x=f'{x_var}:Q',
-        y=f'{y_var}:Q'
-    ) + alt.Chart(regression_df).mark_line(color='red').encode(
-        x=f'{x_var}:Q',
-        y=f'predicted_{y_var}:Q'
-    )
-    st.altair_chart(regression_chart, use_container_width=True)
-else:
-    st.error("Species data not loaded correctly or missing necessary columns.")
-
+        species_chart = alt.Chart(species_df)
