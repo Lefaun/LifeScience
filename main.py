@@ -61,7 +61,7 @@ if validate_columns(movie_df, movie_required_columns):
     )
 
     # Show a slider widget with the years using `st.slider`.
-    years = st.slider("Years", 1986, 2016, (2000, 2016))
+    years = st.slider("Years", 1986, 2016, (2000, 2024))
 
     # Filter the movie DataFrame based on the widget input and reshape it.
     df_filtered = movie_df[(movie_df["genre"].isin(genres)) & (movie_df["year"].between(years[0], years[1]))]
