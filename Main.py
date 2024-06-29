@@ -54,7 +54,7 @@ if validate_columns(movie_df, movie_required_columns):
     genres = st.multiselect(
         "Genres",
         movie_df['genre'].unique(),
-        ["Action", "Adventure", "Biography", "Comedy", "Drama", "Horror"],
+        ["Romance", "Film-Noir", "Music", "Comedy", "Biography", "Sport", "Drama", "Animation", "Sci-Fi", "Western", "War", "Adventure", "Musical","Action", "Horror", "Thriller", "Fantasy", "Mystery", "Crime", "Family", "History" ],
     )
 
     # Show a slider widget with the years using `st.slider`.
