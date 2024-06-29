@@ -30,7 +30,7 @@ def load_movie_data():
 @st.cache
 def load_species_data():
     try:
-        df = pd.read_csv("data/species_strategies.csv")
+        df = pd.read_csv("data/data/species_strategies.csv")
         return df
     except Exception as e:
         st.error(f"Error loading species data: {e}")
