@@ -36,7 +36,7 @@ species_df = load_species_data()
 genres = st.multiselect(
     "Genres",
     #movie_df.genre.unique(),
-    movie_df.genre(),
+    movie_df(),
     ["Romance", "Film-Noir", "Music", "Comedy", "Biography", "Sport", "Drama", "Animation", "Sci-Fi", "Western", "War", "Adventure", "Action", "Horror", "Thriller", "Fantasy", "Mystery" ],
 )
 
