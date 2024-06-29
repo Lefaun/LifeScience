@@ -9,9 +9,7 @@ st.set_page_config(page_title="Movies and Animal Data Visualization", page_icon=
 st.title("🎬 Movies and Animal Data Visualization")
 st.write(
     """
-    This app visualizes data from [The Movie Database (TMDB)](https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata) 
-    and animal survival strategies. It shows which movie genre performed best at the box office over the years and 
-    allows exploration of survival strategies of different animals. Just click on the widgets below to explore!
+    This app visualizes data from The Movie Databases Just click on the widgets below to explore!
     """
 )
 
