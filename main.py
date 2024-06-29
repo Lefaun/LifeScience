@@ -20,7 +20,7 @@ st.write(
 @st.cache
 def load_movie_data():
     try:
-        df = pd.read_csv("data/movies_genres_summary.csv")
+        df = pd.read_csv("data/data/movies_genres_summary4.csv")
         return df
     except Exception as e:
         st.error(f"Error loading movie data: {e}")
