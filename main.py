@@ -44,7 +44,7 @@ years = st.slider("Years", 1986, 2016, (2000, 2024))
 # Filter the movie dataframe based on the widget input and reshape it.
 df_filtered = movie_df[(movie_df["genre"].isin(genres)) & (movie_df["year"].between(years[0], years[1]))]
 df_reshaped = df_filtered.pivot_table(
-    index="year", columns="genre", values="MovieId", fill_value=0 , aggfunc="year")
+    index="year", columns="genre", values="gross", fill_value=0 , aggfunc="year")
 df_reshaped = df_reshaped.sort_values(by="year", ascending=False)
 
 # Display the data as a table using `st.dataframe`.
