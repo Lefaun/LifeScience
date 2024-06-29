@@ -6,10 +6,10 @@ import numpy as np
 
 # Show the page title and description.
 st.set_page_config(page_title="Movies and Animal Data Visualization", page_icon="🎬")
-st.title("🎬 Movies and Animals Data Visualization")
+st.title("🎬 Movies and Animal Data Visualization")
 st.write(
     """
-    This app visualizes data from The Movie Databases Just click on the widgets below to explore!
+    This app visualizes data from The Movie Databases  Just click on the widgets below to explore!
     """
 )
 
