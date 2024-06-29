@@ -37,7 +37,7 @@ genres = st.multiselect(
     "Genres",
      movie_df.genre.unique(),
   
-    ["Romance", "Film-Noir", "Music", "Comedy", "Biography", "Sport", "Drama", "Animation", "Sci-Fi", "Western", "War", "Adventure", "Action", "Horror", "Thriller", "Fantasy", "Mystery", "Crime", "Family", "History" ],
+    ["Romance", "Film-Noir", "Music", "Comedy", "Biography", "Sport", "Drama", "Animation", "Sci-Fi", "Western", "War", "Adventure", "Musical","Action", "Horror", "Thriller", "Fantasy", "Mystery", "Crime", "Family", "History" ],
 )
 
 # Show a slider widget with the years using `st.slider`.
