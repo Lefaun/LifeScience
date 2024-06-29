@@ -35,9 +35,7 @@ species_df = load_species_data()
 # Show a multiselect widget with the genres using `st.multiselect`.
 
 genres = st.multiselect("Genres",["Romance", "Film-Noir", "Music", "Comedy", "Biography", "Sport", "Drama", "Animation", "Sci-Fi", "Western", "War", "Adventure", "Musical","Action", "Horror", "Thriller", "Fantasy", "Mystery", "Crime", "Family", "History" ],
-)
-   
-     movie_df.genre()
+)movie_df.genre()
   
     
 
