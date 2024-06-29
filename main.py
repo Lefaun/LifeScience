@@ -6,7 +6,7 @@ import numpy as np
 
 # Show the page title and description.
 st.set_page_config(page_title="Movies and Animal Data Visualization", page_icon="🎬")
-st.title("🎬 Movies and Animal Data Visualization")
+st.title("🎬 Movies and Animals Data Visualization")
 st.write(
     """
     This app visualizes data from The Movie Databases Just click on the widgets below to explore!
@@ -124,7 +124,7 @@ if validate_columns(species_df, species_required_columns):
 
     # Show a bar chart for the selected variables of species.
     if variables:
-        species_chart = alt.Chart(species_filtered).transform_fold(
+        bar_chart = alt.Chart(species_filtered).transform_fold(
             variables,
             as_=['Variable', 'Value']
         ).mark_bar().encode(
@@ -133,7 +133,7 @@ if validate_columns(species_df, species_required_columns):
             color='Variable:N',
             tooltip=['species', 'Variable', 'Value']
         ).properties(height=320, width=640)
-        st.altair_chart(species_chart, use_container_width=True)
+        st.altair_chart(bar_chart, use_container_width=True)
 
     # Prepare data for linear regression plot.
     x_var = st.selectbox("Choose X variable for regression", ["feeding", "protection", "defense", "attack", "satisfaction"])
