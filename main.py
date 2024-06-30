@@ -9,7 +9,7 @@ st.set_page_config(page_title="Movies and Animal Data Visualization", page_icon=
 st.title("🎬 Movies and Animal Data Visualization")
 st.write(
     """
-    This app visualizes data from [The Movie Databases, Just click on the widgets below to explore!
+    This app visualizes data from [The Movie Databases Just click on the widgets below to explore!
     """
 )
 
@@ -95,37 +95,51 @@ if validate_columns(movie_df, movie_required_columns):
     st.altair_chart(chart, use_container_width=True)
 else:
     st.error("Movie data not loaded correctly or missing necessary columns.")
-################################################################################
-# Ensure the species DataFrame has the necessary columns
 
-    #############################################################################
+# Ensure the species DataFrame has the necessary columns
+species_required_columns = ["species", "protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"]
+if validate_columns(species_df, species_required_columns):
+    # Show a multiselect widget with the species using `st.multiselect`.
+    species = st.multiselect(
+        "Species",
+        species_df['species'].unique(),
+        species_df['species'].unique()[:5]  # Selecting the first 5 species by default
+    )
+
+    # Filter the species DataFrame based on the widget input.
+    species_filtered = species_df[species_df["species"].isin(species)]
+    
+    # Display the data as a table using `st.dataframe`.
+    st.dataframe(
+        species_filtered,
+        use_container_width=True,
+    )
+
     # Show a multiselect widget with the animal variables using `st.multiselect`.
     variables = st.multiselect(
         "Variables",
         ["protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"],
-        ["protection", "defense"])
+        ["protection", "defense"]
+    )
 
-    chart_data = pd.DataFrame(species, columns=["defense", "feeding", "satisfaction"])
-    
-    st.bar_chart(chart_data)
     # Show a bar chart for each selected species.
     #if variables:
-        #for sp in species:
-            #sp_df = species_filtered[species_filtered['species'] == sp]
-            #bar_chart = alt.Chart(sp_df).transform_fold(
-                #variables,
-                #as_=['Variable', 'Value']
-            #).mark_bar().encode(
-                #x='Variable:N',
-                #y='Value:Q',
-                #color='Variable:N',
-                #tooltip=['species', 'Variable', 'Value']
-            #).properties(
-                #title=f'Variables for {sp}',
-                #height=320,
-                #width=640
-            #)
-                #st.altair_chart(bar_chart, use_container_width=True)
+    for sp in species:
+        sp_df = species_filtered[species_filtered['species'] == sp]
+        bar_chart = alt.Chart(sp_df).transform_fold(
+            variables,
+            as_=['Variable', 'Value']
+        ).mark_bar().encode(
+            x='Variable:N',
+            y='Value:Q',
+            color='Variable:N',
+            tooltip=['species', 'Variable', 'Value']
+        ).properties(
+            title=f'Variables for {sp}',
+            height=320,
+            width=640
+        )
+        st.altair_chart(bar_chart, use_container_width=True)
 
     # Prepare data for linear regression plot.
     x_var = st.selectbox("Choose X variable for regression", ["feeding", "protection", "defense", "attack", "satisfaction"])
