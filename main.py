@@ -103,8 +103,7 @@ else:
     variables = st.multiselect(
         "Variables",
         ["protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"],
-        "protection", "defense"]
-    )
+        "protection", "defense"])
 
     chart_data = pd.DataFrame(species, columns=["defense", "feeding", "satisfaction"])
     
