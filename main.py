@@ -116,30 +116,30 @@ if validate_columns(species_df, species_required_columns):
     )
 
     # Show a multiselect widget with the animal variables using `st.multiselect`.
-    variables = st.multiselect(
-        "Variables",
-        ["protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"],
-        ["protection", "defense"]
-    )
+    #variables = st.multiselect(
+        #"Variables",
+        #["protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"],
+        #["protection", "defense"]
+    #)
 
     # Show a bar chart for each selected species.
     #if variables:
-    for sp in species:
-        sp_df = species_filtered[species_filtered['species'] == sp]
-        bar_chart = alt.Chart(sp_df).transform_fold(
-            variables,
-            as_=['Variable', 'Value']
-        ).mark_bar().encode(
-            x='Variable:N',
-            y='Value:Q',
-            color='Variable:N',
-            tooltip=['species', 'Variable', 'Value']
-        ).properties(
-            title=f'Variables for {sp}',
-            height=320,
-            width=640
-        )
-        st.altair_chart(bar_chart, use_container_width=True)
+    #for sp in species:
+        #sp_df = species_filtered[species_filtered['species'] == sp]
+        #bar_chart = alt.Chart(sp_df).transform_fold(
+            #variables,
+            #as_=['Variable', 'Value']
+        #).mark_bar().encode(
+            #x='Variable:N',
+            #y='Value:Q',
+            #color='Variable:N',
+            #tooltip=['species', 'Variable', 'Value']
+        #).properties(
+            #title=f'Variables for {sp}',
+            #height=320,
+            #width=640
+        #)
+        st.altair_chart(species_filtered, use_container_width=True)
 
     # Prepare data for linear regression plot.
     x_var = st.selectbox("Choose X variable for regression", ["feeding", "protection", "defense", "attack", "satisfaction"])
