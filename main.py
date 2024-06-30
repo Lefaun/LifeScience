@@ -97,45 +97,7 @@ else:
     st.error("Movie data not loaded correctly or missing necessary columns.")
 ################################################################################
 # Ensure the species DataFrame has the necessary columns
-species_required_columns = ["species", "protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"]
-if validate_columns(species_df, species_required_columns):
-    # Show a multiselect widget with the species using `st.multiselect`.
-    species = st.multiselect(
-        "Species",
-        species_df['species'].unique(),
-        species_df['species'].unique()[:5]  # Selecting the first 5 species by default
-    )
 
-    # Filter the species DataFrame based on the widget input.
-    species_filtered = species_df[species_df["species"].isin(species)]
-    
-    # Display the data as a table using `st.dataframe`.
-    st.dataframe(
-        species_filtered,
-        use_container_width=True,
-    )
-    # Ensure the species DataFrame has the necessary columns
-species_required_columns = ["species", "protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"]
-if validate_columns(species_df, species_required_columns):
-    # Show a multiselect widget with the animal variables using `st.multiselect`.
-    variables = st.multiselect(
-        "Variables",
-        ["protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"],
-        ["protection", "defense"]
-    )
-
-    # Show a bar chart for the selected variables of species.
-    if variables:
-        species_chart = alt.Chart(species_df).transform_fold(
-            variables,
-            as_=['Variable', 'Value']
-        ).mark_bar().encode(
-            x='species:N',
-            y='Value:Q',
-            color='Variable:N',
-            tooltip=['species', 'Variable', 'Value']
-        ).properties(height=320, width=640)
-        st.altair_chart(species_chart, use_container_width=True)
 
     #############################################################################
     # Show a multiselect widget with the animal variables using `st.multiselect`.
