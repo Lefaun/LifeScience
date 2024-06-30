@@ -139,7 +139,7 @@ if validate_columns(species_df, species_required_columns):
             #height=320,
             #width=640
         #)
-        st.altair_chart(species_filtered, use_container_width=True)
+    st.altair_chart(species_filtered, use_container_width=True)
 
     # Prepare data for linear regression plot.
     x_var = st.selectbox("Choose X variable for regression", ["feeding", "protection", "defense", "attack", "satisfaction"])
