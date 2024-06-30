@@ -116,11 +116,11 @@ if validate_columns(species_df, species_required_columns):
     )
 
     # Show a multiselect widget with the animal variables using `st.multiselect`.
-    variables = st.multiselect(
-        "Variables",
-        ["protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"],
-        ["protection", "defense"]
-    )
+    #variables = st.multiselect(
+        #"Variables",
+        #["protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"],
+        #["protection", "defense"]
+    #)
 
     # Show a bar chart for each selected species.
     if variables:
