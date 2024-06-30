@@ -15,7 +15,7 @@ st.write(
 
 # Load the movie data from a CSV. We're caching this so it doesn't reload every time the app
 # reruns (e.g., if the user interacts with the widgets).
-@st.cache
+#@st.cache
 def load_movie_data():
     try:
         df = pd.read_csv("data/data/movies_genres_summary4.csv")
@@ -25,7 +25,7 @@ def load_movie_data():
         return pd.DataFrame()
 
 # Load the species data from a CSV.
-@st.cache
+#@st.cache
 def load_species_data():
     try:
         df = pd.read_csv("data/data/species_strategies2.csv")
