@@ -98,15 +98,17 @@ else:
 ################################################################################
 # Ensure the species DataFrame has the necessary columns
 
-
     #############################################################################
     # Show a multiselect widget with the animal variables using `st.multiselect`.
-    #variables = st.multiselect(
-        #"Variables",
-        #["protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"],
-        #["protection", "defense"]
-    #)
+    variables = st.multiselect(
+        "Variables",
+        ["protection", "defense", "attack", "feeding", "satisfaction", "sexual_reproduction"],
+        "protection", "defense"]
+    )
 
+    chart_data = pd.DataFrame(species, columns=["defense", "feeding", "satisfaction"])
+    
+    st.bar_chart(chart_data)
     # Show a bar chart for each selected species.
     #if variables:
         #for sp in species:
