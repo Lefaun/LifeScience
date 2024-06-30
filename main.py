@@ -6,10 +6,10 @@ import numpy as np
 
 # Show the page title and description.
 st.set_page_config(page_title="Movies and Animal Data Visualization", page_icon="🎬")
-st.title("🎬 Movies and Animals Data Visualization")
+st.title("🎬 Movies and Animal Data Visualization")
 st.write(
     """
-    This app visualizes data from The Movie Databases Just click on the widgets below to explore!
+    This app visualizes data from [The Movie Databases, Just click on the widgets below to explore!
     """
 )
 
@@ -122,18 +122,24 @@ if validate_columns(species_df, species_required_columns):
         ["protection", "defense"]
     )
 
-    # Show a bar chart for the selected variables of species.
+    # Show a bar chart for each selected species.
     if variables:
-        bar_chart = alt.Chart(species_filtered).transform_fold(
-            variables,
-            as_=['Variable', 'Value']
-        ).mark_bar().encode(
-            x='species:N',
-            y='Value:Q',
-            color='Variable:N',
-            tooltip=['species', 'Variable', 'Value']
-        ).properties(height=320, width=640)
-        st.altair_chart(bar_chart, use_container_width=True)
+        for sp in species:
+            sp_df = species_filtered[species_filtered['species'] == sp]
+            bar_chart = alt.Chart(sp_df).transform_fold(
+                variables,
+                as_=['Variable', 'Value']
+            ).mark_bar().encode(
+                x='Variable:N',
+                y='Value:Q',
+                color='Variable:N',
+                tooltip=['species', 'Variable', 'Value']
+            ).properties(
+                title=f'Variables for {sp}',
+                height=320,
+                width=640
+            )
+            st.altair_chart(bar_chart, use_container_width=True)
 
     # Prepare data for linear regression plot.
     x_var = st.selectbox("Choose X variable for regression", ["feeding", "protection", "defense", "attack", "satisfaction"])
