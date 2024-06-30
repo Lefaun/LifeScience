@@ -159,5 +159,5 @@ else:
         st.altair_chart(regression_chart, use_container_width=True)
     else:
         st.error("Selected variables must be numeric for regression analysis.")
-else:
-    st.error("Species data not loaded correctly or missing necessary columns.")
+    else:
+        st.error("Species data not loaded correctly or missing necessary columns.")
