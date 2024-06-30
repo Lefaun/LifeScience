@@ -140,7 +140,7 @@ if validate_columns(species_df, species_required_columns):
             #width=640
         #)
     #st.altair_chart(species_filtered, use_container_width=True)
-    chart_data = pd.DataFrame(species_filtered, columns=["feeding", "protection", "satisfaction", "species"])
+    chart_data = pd.DataFrame(species_filtered, columns=["feeding", "protection", "satisfaction", "species_filtered"])
     st.bar_chart(chart_data)
 
     # Prepare data for linear regression plot.
